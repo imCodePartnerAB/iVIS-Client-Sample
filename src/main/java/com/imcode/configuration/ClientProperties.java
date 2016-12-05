@@ -1,10 +1,12 @@
 package com.imcode.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by ruslan on 05.12.16.
  */
+@Component
 @ConfigurationProperties(locations = "classpath:client.properties")
 public class ClientProperties {
 

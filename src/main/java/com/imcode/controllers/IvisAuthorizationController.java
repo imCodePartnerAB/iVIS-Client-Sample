@@ -4,6 +4,7 @@ import com.imcode.configuration.ClientProperties;
 import imcode.services.utils.IvisOAuth2Utils;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,10 @@ public class IvisAuthorizationController {
     private static final String START_VIEW_NAME = "welcome";
 
     @Autowired
-    public IvisAuthorizationController(AuthorizationCodeResourceDetails client,
-                                       ClientProperties clientProperties) {
+    public IvisAuthorizationController(
+            @Qualifier("clientInformation")
+                    AuthorizationCodeResourceDetails client,
+            ClientProperties clientProperties) {
         this.client = client;
         this.clientProperties = clientProperties;
         this.redirectUrl = clientProperties.getClientAddress() + REDIRECT_RELATIVE_URL;

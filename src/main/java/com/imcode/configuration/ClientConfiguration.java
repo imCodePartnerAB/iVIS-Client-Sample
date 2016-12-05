@@ -2,8 +2,7 @@ package com.imcode.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 
 /**
@@ -19,7 +18,7 @@ public class ClientConfiguration {
         this.clientProperties = clientProperties;
     }
 
-    @Bean
+    @Bean(name = "clientInformation")
     public AuthorizationCodeResourceDetails clientBean() {
         IvisAuthorizationCodeResourceDetails client = new IvisAuthorizationCodeResourceDetails();
         String userAuthorizationUrl = clientProperties.getApiServerAddress() + clientProperties.getUserAuthorizationRelativeUri();
