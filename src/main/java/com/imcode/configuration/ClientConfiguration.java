@@ -2,6 +2,7 @@ package com.imcode.configuration;
 
 
 import imcode.services.filter.IvisAuthorizedFilter;
+import imcode.services.oauth2.IvisAuthorizationCodeResourceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -58,19 +59,5 @@ public class ClientConfiguration {
 
         return client;
     }
-
-    private class IvisAuthorizationCodeResourceDetails extends AuthorizationCodeResourceDetails {
-        private boolean clientOnly = true;
-
-        @Override
-        public boolean isClientOnly() {
-            return clientOnly;
-        }
-
-        public void setClientOnly(boolean clientOnly) {
-            this.clientOnly = clientOnly;
-        }
-    }
-
 
 }
