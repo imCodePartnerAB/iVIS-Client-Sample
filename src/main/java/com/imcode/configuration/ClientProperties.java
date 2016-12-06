@@ -14,7 +14,6 @@ public class ClientProperties {
     private String clientAddress;
     private String clientId;
     private String clientSecret;
-    private String redirectRelativeUri;
     private String userAuthorizationRelativeUri;
     private String accessTokenRelativeUri;
     private String ivisLogoutRelativeUri;
@@ -42,14 +41,6 @@ public class ClientProperties {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getRedirectRelativeUri() {
-        return redirectRelativeUri;
-    }
-
-    public void setRedirectRelativeUri(String redirectRelativeUri) {
-        this.redirectRelativeUri = redirectRelativeUri;
     }
 
     public String getUserAuthorizationRelativeUri() {
