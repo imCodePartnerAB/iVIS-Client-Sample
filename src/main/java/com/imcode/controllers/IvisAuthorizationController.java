@@ -68,7 +68,7 @@ public class IvisAuthorizationController {
         OAuth2AccessToken accessToken = IvisOAuth2Utils.getAccessToken(client, code, redirectUrl);
         IvisOAuth2Utils.setAccessToken(request, accessToken);
         IvisOAuth2Utils.setRefreshTokenAsCokie(response, accessToken.getRefreshToken(), clientProperties.getRefreshTokenValiditySeconds());
-        view.setViewName(START_VIEW_NAME);
+        view.setViewName("redirect:/");
         return view;
     }
 

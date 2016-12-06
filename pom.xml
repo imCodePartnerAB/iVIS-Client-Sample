@@ -28,7 +28,7 @@
         <java.version>1.8</java.version>
         <slf4j.version>1.7.5</slf4j.version>
         <log4j.version>1.2.15</log4j.version>
-        <ivis.version>1.0.0-alpha1</ivis.version>
+        <ivis.version>1.0.0-alpha2-SNAPSHOT</ivis.version>
     </properties>
 
     <dependencies>
