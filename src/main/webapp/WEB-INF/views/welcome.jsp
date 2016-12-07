@@ -11,5 +11,6 @@
     <title>Welcome</title>
 </head>
 <body>
+<a href="${pageContext.servletContext.contextPath}/pupils">See all pupils</a>
 </body>
 </html>
