@@ -3,10 +3,13 @@ package com.imcode.configuration;
 
 import imcode.services.filter.IvisAuthorizedFilter;
 import imcode.services.oauth2.IvisAuthorizationCodeResourceDetails;
+import imcode.services.restful.ProxyIvisServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 
 import javax.servlet.Filter;
@@ -28,7 +31,6 @@ public class ClientConfiguration {
     public FilterRegistrationBean someFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(ivisAuthorizedFilter());
-        registration.addUrlPatterns("/persons/*");
         registration.addUrlPatterns("/pupils/*");
         registration.addInitParameter("roles", "ROLE_ADMIN,ROLE_DEVELOPER");
         registration.setName("ivisAuthorizedFilter");
@@ -47,7 +49,7 @@ public class ClientConfiguration {
     }
 
     @Bean(name = "clientInformation")
-    public AuthorizationCodeResourceDetails clientBean() {
+    public AuthorizationCodeResourceDetails ivisClient() {
         IvisAuthorizationCodeResourceDetails client = new IvisAuthorizationCodeResourceDetails();
         String userAuthorizationUrl = clientProperties.getApiServerAddress() + clientProperties.getUserAuthorizationRelativeUri();
         String accessTokenUrl = clientProperties.getApiServerAddress() + clientProperties.getAccessTokenRelativeUri();
@@ -58,6 +60,17 @@ public class ClientConfiguration {
         client.setAccessTokenUri(accessTokenUrl);
 
         return client;
+    }
+
+    @Bean
+    public OAuth2ClientContext clientContext() {
+        return new DefaultOAuth2ClientContext();
+    }
+
+    @Bean
+    public ProxyIvisServiceFactory ivisServiceFactory() {
+        String apiUrl = clientProperties.getApiServerAddress() + clientProperties.getApiRelativeUrl();
+        return new ProxyIvisServiceFactory(apiUrl, clientContext(), ivisClient());
     }
 
 }
