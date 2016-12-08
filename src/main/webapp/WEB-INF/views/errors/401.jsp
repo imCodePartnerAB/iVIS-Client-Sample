@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: ruslan
   Date: 06.12.16
@@ -11,6 +11,6 @@
     <title>Unauthorized</title>
 </head>
 <body>
-
+${requestScope["javax.servlet.error.exception"].message}
 </body>
 </html>

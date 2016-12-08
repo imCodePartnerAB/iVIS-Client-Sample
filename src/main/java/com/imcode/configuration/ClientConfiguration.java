@@ -38,6 +38,11 @@ public class ClientConfiguration {
         return registration;
     }
 
+    @Bean
+    public ServerProperties errorHandling() {
+        return new ClientCustomization();
+    }
+
     @Bean(name = "ivisAuthorizedFilter")
     public Filter ivisAuthorizedFilter() {
         return new IvisAuthorizedFilter();
