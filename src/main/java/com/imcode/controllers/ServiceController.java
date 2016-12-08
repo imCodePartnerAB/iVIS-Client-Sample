@@ -12,19 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by ruslan on 06.12.16.
  */
 @Controller
-@RequestMapping("/" + PupilController.MAIN_PATH)
-public class PupilController {
+@RequestMapping("/services")
+public class ServiceController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PupilController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
 
-
-    public static final String MAIN_PATH = "pupils";
-
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/pupils", method = RequestMethod.GET)
     public ModelAndView list(ModelAndView view, PupilService pupilService) {
         view.addObject("pupils", pupilService.findAll());
-        view.setViewName(MAIN_PATH + "/list");
+        view.setViewName("pupils/list");
+        logger.debug("pupils findAll invoked");
         return view;
     }
+
+
 
 }

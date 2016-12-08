@@ -31,8 +31,7 @@ public class ClientConfiguration {
     public FilterRegistrationBean ivisAuthorizedFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(ivisAuthorizedFilter());
-        registration.addUrlPatterns("/pupils/*");
-        registration.addInitParameter("roles", "ROLE_ADMIN,ROLE_DEVELOPER,ROLE_PPP");
+        registration.addUrlPatterns("/services/pupils/*");
         registration.setName("ivisAuthorizedFilter");
         registration.setOrder(1);
         return registration;
@@ -45,7 +44,8 @@ public class ClientConfiguration {
 
     @Bean(name = "ivisAuthorizedFilter")
     public Filter ivisAuthorizedFilter() {
-        return new IvisAuthorizedFilter();
+        IvisAuthorizedFilter ivisAuthorizedFilter = new IvisAuthorizedFilter();
+        return ivisAuthorizedFilter;
     }
 
     @Bean(name = "clientInformation")

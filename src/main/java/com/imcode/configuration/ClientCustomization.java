@@ -1,5 +1,6 @@
 package com.imcode.configuration;
 
+import com.imcode.controllers.error.UnauthorizedErrorController;
 import imcode.services.exceptionhandling.GeneralException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class ClientCustomization extends ServerProperties {
     @Value("${spring.mvc.view.suffix}")
     private String viewSuffix;
 
+    private static final String ERRORS_VIEW_PREFIX = "errors/";
+
     @Override
     /*
         Used for error handling
@@ -32,17 +35,15 @@ public class ClientCustomization extends ServerProperties {
     public void customize(ConfigurableEmbeddedServletContainer container) {
         super.customize(container);
         container.addErrorPages(new ErrorPage(GeneralException.class, viewWrap("api_error")));//For Api access exception
-        container.addErrorPages(new ErrorPage(UnauthorizedUserException.class, viewWrap("401")));//For Api access exception
+        container.addErrorPages(new ErrorPage(UnauthorizedUserException.class, UnauthorizedErrorController.PATH));//For IvisAuthorizedFilter
         container.addErrorPages(new ErrorPage(AccessDeniedException.class, viewWrap("403")));//For Api access exception
-        container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, viewWrap("401")));//For IvisAuthorizedFilter
+        container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, UnauthorizedErrorController.PATH));
         container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, viewWrap("404")));//Not found
-        container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, viewWrap("500")));//Not found
-        container.addErrorPages(new ErrorPage(viewWrap("500")));//For Api access exception
+        container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, viewWrap("500")));//Internal server error
     }
 
     private String viewWrap(String view) {
-        String errorPrefix = "errors/";
-        String uri = viewPrefix + errorPrefix + view + viewSuffix;
+        String uri = viewPrefix + ERRORS_VIEW_PREFIX + view + viewSuffix;
         logger.info("Error uri: " + uri);
         return uri;
     }
