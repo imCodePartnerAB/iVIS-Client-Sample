@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedUserException;
 
-import java.nio.file.AccessDeniedException;
 
 
 /**
