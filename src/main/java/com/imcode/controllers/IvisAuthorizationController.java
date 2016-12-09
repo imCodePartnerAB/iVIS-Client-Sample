@@ -29,7 +29,6 @@ import java.net.URISyntaxException;
  * Created by ruslan on 02.12.16.
  */
 @Controller
-@SessionAttributes(IvisAuthorizedFilter.REQUEST_URL_ATTRIBUTE_NAME)
 public class IvisAuthorizationController {
 
     private static final Logger logger = LoggerFactory.getLogger(IvisAuthorizationController.class);
@@ -71,14 +70,16 @@ public class IvisAuthorizationController {
     @RequestMapping(value = REDIRECT_RELATIVE_URL, method = RequestMethod.GET)
     public View authorizationClientProcess(HttpServletRequest request,
                                            HttpServletResponse response,
-                                           Model view,
                                            WebRequest webRequest,
-                                           @SessionAttribute(value = IvisAuthorizedFilter.REQUEST_URL_ATTRIBUTE_NAME, required = false) String protectedResourcesUrl,
-                                           @RequestParam("code") String code) throws UnsupportedEncodingException {
+                                           @SessionAttribute(value = IvisAuthorizedFilter.REQUEST_URI_ATTRIBUTE_NAME, required = false) String protectedResourcesUrl,
+                                           @RequestParam("code") String code) throws IOException {
         OAuth2AccessToken accessToken = IvisOAuth2Utils.getAccessToken(client, code, redirectUrl);
         IvisOAuth2Utils.setAccessToken(request, accessToken);
         IvisOAuth2Utils.setRefreshTokenAsCokie(response, accessToken.getRefreshToken(), clientProperties.getRefreshTokenValiditySeconds());
         String redirect = StringUtils.isEmpty(protectedResourcesUrl) ? "/" : protectedResourcesUrl;
+        if (redirect.startsWith(request.getContextPath())) {
+            redirect = redirect.replace(request.getContextPath(), "");
+        }
         return new RedirectView(redirect, true);
     }
 
