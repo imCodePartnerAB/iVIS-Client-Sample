@@ -74,6 +74,9 @@ public class IvisAuthorizationController {
                                            @SessionAttribute(value = IvisAuthorizedFilter.REQUEST_URI_ATTRIBUTE_NAME, required = false) String protectedResourcesUrl,
                                            @RequestParam("code") String code) throws IOException {
         OAuth2AccessToken accessToken = IvisOAuth2Utils.getAccessToken(client, code, redirectUrl);
+        if (accessToken == null) {
+            return new RedirectView(LOGIN_RELATIVE_URL, true);
+        }
         IvisOAuth2Utils.setAccessToken(request, accessToken);
         IvisOAuth2Utils.setRefreshTokenAsCokie(response, accessToken.getRefreshToken(), clientProperties.getRefreshTokenValiditySeconds());
         String redirect = StringUtils.isEmpty(protectedResourcesUrl) ? "/" : protectedResourcesUrl;

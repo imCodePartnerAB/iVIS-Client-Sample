@@ -46,6 +46,17 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-web-services</artifactId>
                 </exclusion>
+                <!-- security is based on iVIS, so spring security is not needed-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+                <!-- Maybe you need if you configured persistence provider -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </exclusion>
+
             </exclusions>
         </dependency>
         <dependency>
