@@ -11,13 +11,14 @@
     <title>Api exception</title>
 </head>
 <body>
-Error code: ${exception.errorCode}
+Error code: ${requestScope["javax.servlet.error.exception"].errorCode}
 <br>
 Error message:
 <br>
-${exception.errorMessage}
+${requestScope["javax.servlet.error.exception"].errorMessage}
+<br>
 Error description:
 <br>
-${exception.errorDescription}
+${requestScope["javax.servlet.error.exception"].errorDescription}
 </body>
 </html>

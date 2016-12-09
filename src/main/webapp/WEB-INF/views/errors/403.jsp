@@ -11,6 +11,6 @@
     <title>Forbidden</title>
 </head>
 <body>
-${exception.message}
+${requestScope["javax.servlet.error.exception"].message}
 </body>
 </html>
