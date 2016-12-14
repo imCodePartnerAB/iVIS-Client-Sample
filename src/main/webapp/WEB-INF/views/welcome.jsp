@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>Welcome page</h1>
+<a href="${pageContext.servletContext.contextPath}/login">Login</a>
+<br>
 <ivis:authorized>
     <a href="${pageContext.servletContext.contextPath}/services/classes">Create school class</a>
 </ivis:authorized>

@@ -53,7 +53,6 @@
         </form:select>
         <br>
         <br>
-        <input type="hidden" name="diaries">
         <input type="submit" value="Create"/>
     </div>
 </form:form>

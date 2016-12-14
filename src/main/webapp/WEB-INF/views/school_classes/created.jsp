@@ -4,6 +4,6 @@
     <title>Created</title>
 </head>
 <body>
-School is created.
+School class is created.
 </body>
 </html>

@@ -2,11 +2,11 @@ package com.imcode.configuration;
 
 import imcode.services.argumentresolver.IvisServiceArgumentResolver;
 import imcode.services.converters.IvisIdToDomainClassConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.ConversionService;
+import org.springframework.context.support.ConversionServiceFactoryBean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -21,18 +21,11 @@ import java.util.List;
 @Configuration
 public class ClientMvcConfiguration extends WebMvcConfigurerAdapter {
 
-    private final ConversionService conversionService;
-
     @Value("${spring.mvc.view.prefix}")
     private String viewPrefix;
 
     @Value("${spring.mvc.view.suffix}")
     private String viewSuffix;
-
-    @Autowired
-    public ClientMvcConfiguration(ConversionService conversionService) {
-        this.conversionService = conversionService;
-    }
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -59,6 +52,11 @@ public class ClientMvcConfiguration extends WebMvcConfigurerAdapter {
                 .addResourceLocations("/WEB-INF/web-resources/");
     }
 
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(ivisIdToDomainClassConverter());
+    }
+
     @Bean
     public HandlerMethodArgumentResolver ivisServiceArgumentResolver() {
         return new IvisServiceArgumentResolver();
@@ -66,7 +64,12 @@ public class ClientMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public IvisIdToDomainClassConverter ivisIdToDomainClassConverter() {
-        return new IvisIdToDomainClassConverter(conversionService);
+        return new IvisIdToDomainClassConverter(conversionServiceFactoryBean().getObject());
+    }
+
+    @Bean
+    public ConversionServiceFactoryBean conversionServiceFactoryBean() {
+        return new ConversionServiceFactoryBean();
     }
 
 }

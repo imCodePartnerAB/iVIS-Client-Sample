@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,7 +42,7 @@ public class ServiceController {
                                         WebRequest webRequest,
                                         @ModelAttribute("schoolClass") SchoolClass schoolClass,
                                         SchoolClassService classService) {
-//        classService.save(schoolClass);
+        classService.save(schoolClass);
         view.setViewName("school_classes/created");
         return view;
     }
