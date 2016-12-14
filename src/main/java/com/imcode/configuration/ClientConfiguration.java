@@ -31,7 +31,7 @@ public class ClientConfiguration {
     public FilterRegistrationBean ivisAuthorizedFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(ivisAuthorizedFilter());
-        registration.addUrlPatterns("/services/pupils/*");
+        registration.addUrlPatterns("/services/classes/*");
         registration.setName("ivisAuthorizedFilter");
         registration.setOrder(1);
         return registration;

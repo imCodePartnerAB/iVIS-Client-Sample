@@ -1,16 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ruslan
-  Date: 02.12.16
-  Time: 19:12
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="ivis" uri="ivis.sdk" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Welcome</title>
 </head>
 <body>
-<a href="${pageContext.servletContext.contextPath}/services/pupils">See all pupils</a>
+<h1>Welcome page</h1>
+<ivis:authorized>
+    <a href="${pageContext.servletContext.contextPath}/services/classes">Create school class</a>
+</ivis:authorized>
 </body>
 </html>
