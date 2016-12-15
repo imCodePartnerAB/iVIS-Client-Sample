@@ -2,7 +2,9 @@ package com.imcode.configuration;
 
 import imcode.services.argumentresolver.IvisServiceArgumentResolver;
 import imcode.services.converters.IvisIdToDomainClassConverter;
+import imcode.services.filter.IvisAuthorizedFilter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.servlet.Filter;
 import java.util.List;
 
 /**
@@ -33,6 +36,22 @@ public class ClientMvcConfiguration extends WebMvcConfigurerAdapter {
         resolver.setPrefix(viewPrefix);
         resolver.setSuffix(viewSuffix);
         return resolver;
+    }
+
+    @Bean(name = "ivisAuthorizedFilter")
+    public Filter ivisAuthorizedFilter() {
+        IvisAuthorizedFilter ivisAuthorizedFilter = new IvisAuthorizedFilter();
+        return ivisAuthorizedFilter;
+    }
+
+    @Bean
+    public FilterRegistrationBean ivisAuthorizedFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(ivisAuthorizedFilter());
+        registration.addUrlPatterns("/services/classes/*");
+        registration.setName("ivisAuthorizedFilter");
+        registration.setOrder(1);
+        return registration;
     }
 
     @Override

@@ -28,24 +28,8 @@ public class ClientConfiguration {
     }
 
     @Bean
-    public FilterRegistrationBean ivisAuthorizedFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(ivisAuthorizedFilter());
-        registration.addUrlPatterns("/services/classes/*");
-        registration.setName("ivisAuthorizedFilter");
-        registration.setOrder(1);
-        return registration;
-    }
-
-    @Bean
     public ServerProperties errorHandling() {
         return new ClientCustomization();
-    }
-
-    @Bean(name = "ivisAuthorizedFilter")
-    public Filter ivisAuthorizedFilter() {
-        IvisAuthorizedFilter ivisAuthorizedFilter = new IvisAuthorizedFilter();
-        return ivisAuthorizedFilter;
     }
 
     @Bean(name = "clientInformation")
