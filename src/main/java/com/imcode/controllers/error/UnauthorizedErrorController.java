@@ -2,7 +2,6 @@ package com.imcode.controllers.error;
 
 import com.imcode.configuration.ClientProperties;
 import com.imcode.controllers.IvisAuthorizationController;
-import imcode.services.filter.IvisAuthorizedFilter;
 import imcode.services.utils.IvisOAuth2Utils;
 import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
@@ -58,7 +57,7 @@ public class UnauthorizedErrorController implements ErrorController {
         OAuth2AccessToken accessToken = IvisOAuth2Utils.getAccessToken(client, refreshTokenCookie);
         //logout client
         if (accessToken == null) {
-            String loginUrl = clientProperties.getClientAddress() + IvisAuthorizationController.LOGIN_RELATIVE_URL;
+            String loginUrl = clientProperties.getClientAddress() + IvisAuthorizationController.LOGIN_RELATIVE_URI;
             String redirectUrl = new URIBuilder(ivisLogoutUrl)
                     .addParameter("redirect_url", loginUrl)
                     .build()
