@@ -18,7 +18,7 @@ public class ClientProperties {
     private String accessTokenRelativeUri;
     private String ivisLogoutRelativeUri;
     private Integer refreshTokenValiditySeconds;
-    private String apiRelativeUrl;
+    private String apiRelativeUri;
 
     public String getApiServerAddress() {
         return apiServerAddress;
@@ -84,11 +84,11 @@ public class ClientProperties {
         this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
-    public String getApiRelativeUrl() {
-        return apiRelativeUrl;
+    public String getApiRelativeUri() {
+        return apiRelativeUri;
     }
 
-    public void setApiRelativeUrl(String apiRelativeUrl) {
-        this.apiRelativeUrl = apiRelativeUrl;
+    public void setApiRelativeUri(String apiRelativeUri) {
+        this.apiRelativeUri = apiRelativeUri;
     }
 }

@@ -69,7 +69,7 @@ public class ClientConfiguration {
 
     @Bean
     public ProxyIvisServiceFactory ivisServiceFactory() {
-        String apiUrl = clientProperties.getApiServerAddress() + clientProperties.getApiRelativeUrl();
+        String apiUrl = clientProperties.getApiServerAddress() + clientProperties.getApiRelativeUri();
         return new ProxyIvisServiceFactory(apiUrl, clientContext(), ivisClient());
     }
 
