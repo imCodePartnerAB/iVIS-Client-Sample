@@ -4,6 +4,7 @@ import imcode.services.argumentresolver.IvisServiceArgumentResolver;
 import imcode.services.converters.IvisIdToDomainClassConverter;
 import imcode.services.filter.IvisAuthorizedFilter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -74,6 +75,12 @@ public class ClientMvcConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(ivisIdToDomainClassConverter());
+    }
+
+
+    @Bean
+    public ServerProperties errorHandling() {
+        return new ClientCustomization();
     }
 
     @Bean

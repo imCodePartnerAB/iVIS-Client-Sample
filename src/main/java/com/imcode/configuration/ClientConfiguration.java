@@ -27,11 +27,6 @@ public class ClientConfiguration {
         this.clientProperties = clientProperties;
     }
 
-    @Bean
-    public ServerProperties errorHandling() {
-        return new ClientCustomization();
-    }
-
     @Bean(name = "clientInformation")
     public AuthorizationCodeResourceDetails ivisClient() {
         IvisAuthorizationCodeResourceDetails client = new IvisAuthorizationCodeResourceDetails();
